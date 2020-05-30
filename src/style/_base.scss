@@ -1,0 +1,10 @@
+.content {
+    width: 65%;
+    margin: auto;
+}
+
+tr {
+    &:nth-child(even) {
+        background: #e0e0e0;
+    }
+}
