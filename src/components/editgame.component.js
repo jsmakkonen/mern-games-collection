@@ -1,47 +1,49 @@
-import React, { Fragment, useState } from 'react';
+import React, {Fragment, useState} from 'react'
+import {useSnackbar} from 'notistack'
 
 const EditGame = ({game}) => {
-    const [values, setValues] = useState({
-        title: game.title,
-        developer: game.developer,
-        platform: game.platform,
-        description: game.description,
-        release: game.release,
-        reviewscore: game.reviewscore
-    })
+  const [values, setValues] = useState({
+    title: game.title,
+    developer: game.developer,
+    platform: game.platform,
+    description: game.description,
+    release: game.release,
+    reviewscore: game.reviewscore,
+  })
 
-    const updateGame = async (e) => {
-        e.preventDefault();
-        try {
-            await fetch(`http://localhost:5000/games/${game._id}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    title: values.title,
-                    developer: values.developer,
-                    platform: values.platform,
-                    description: values.description,
-                    reviewscore: values.reviewscore,
-                    release: values.release
-                })
-            })
+  const {enqueueSnackbar} = useSnackbar()
 
-            window.location = '/'
-        } catch (err) {
-            console.log(err.message)
-        }
+  const updateGame = async (e) => {
+    e.preventDefault()
+    try {
+      await fetch(`http://localhost:5000/games/${game._id}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          title: values.title,
+          developer: values.developer,
+          platform: values.platform,
+          description: values.description,
+          reviewscore: values.reviewscore,
+          release: values.release,
+        }),
+      })
+
+      window.location = '/'
+    } catch (err) {
+      enqueueSnackbar(err.message, {variant: 'error'})
     }
+  }
 
-    return (
-        <Fragment>
+  return (
+    <Fragment>
       <button
         type="button"
         className="btn btn-warning"
         data-toggle="modal"
-        data-target={`#id${game._id}`}
-      >
+        data-target={`#id${game._id}`}>
         Edit
       </button>
 
@@ -135,15 +137,10 @@ const EditGame = ({game}) => {
                 type="button"
                 className="btn btn-warning"
                 data-dismiss="modal"
-                onClick={(e) => updateGame(e)}
-              >
+                onClick={(e) => updateGame(e)}>
                 Edit
               </button>
-              <button
-                type="button"
-                className="btn btn-danger"
-                data-dismiss="modal"
-              >
+              <button type="button" className="btn btn-danger" data-dismiss="modal">
                 Close
               </button>
             </div>
@@ -151,7 +148,7 @@ const EditGame = ({game}) => {
         </div>
       </div>
     </Fragment>
-    )
+  )
 }
 
-export default EditGame;
+export default EditGame

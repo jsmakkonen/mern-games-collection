@@ -1,45 +1,47 @@
-import React, { Fragment, useState } from 'react';
+import React, {Fragment, useState} from 'react'
+import {useSnackbar} from 'notistack'
 
 const EditUpcomingGame = ({item}) => {
-    const [values, setValues] = useState({
-        title: item.title,
-        developer: item.developer,
-        platform: item.platform,
-        description: item.description,
-        release: item.release
-    })
+  const [values, setValues] = useState({
+    title: item.title,
+    developer: item.developer,
+    platform: item.platform,
+    description: item.description,
+    release: item.release,
+  })
 
-    const updateUpcomingGame = async (e) => {
-        e.preventDefault();
-        try {
-            await fetch(`http://localhost:5000/upcoming/${item._id}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    title: values.title,
-                    developer: values.developer,
-                    platform: values.platform,
-                    description: values.description,
-                    release: values.release
-                })
-            })
+  const {enqueueSnackbar} = useSnackbar()
 
-            window.location = '/upcoming'
-        } catch (err) {
-            console.log(err.message)
-        }
+  const updateUpcomingGame = async (e) => {
+    e.preventDefault()
+    try {
+      await fetch(`http://localhost:5000/upcoming/${item._id}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          title: values.title,
+          developer: values.developer,
+          platform: values.platform,
+          description: values.description,
+          release: values.release,
+        }),
+      })
+
+      window.location = '/upcoming'
+    } catch (err) {
+      enqueueSnackbar(err.message, {variant: 'error'})
     }
+  }
 
-    return (
-        <Fragment>
+  return (
+    <Fragment>
       <button
         type="button"
         className="btn btn-warning"
         data-toggle="modal"
-        data-target={`#uid${item._id}`}
-      >
+        data-target={`#uid${item._id}`}>
         Edit
       </button>
 
@@ -121,15 +123,10 @@ const EditUpcomingGame = ({item}) => {
                 type="button"
                 className="btn btn-warning"
                 data-dismiss="modal"
-                onClick={(e) => updateUpcomingGame(e)}
-              >
+                onClick={(e) => updateUpcomingGame(e)}>
                 Edit
               </button>
-              <button
-                type="button"
-                className="btn btn-danger"
-                data-dismiss="modal"
-              >
+              <button type="button" className="btn btn-danger" data-dismiss="modal">
                 Close
               </button>
             </div>
@@ -137,7 +134,7 @@ const EditUpcomingGame = ({item}) => {
         </div>
       </div>
     </Fragment>
-    )
+  )
 }
 
-export default EditUpcomingGame;
+export default EditUpcomingGame

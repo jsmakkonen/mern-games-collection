@@ -1,14 +1,14 @@
-import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import ListGames from './components/listgames.component';
-import Navbar from './components/navbar.component';
-import ListGear from './components/listgear.component';
-import ListUpcoming from './components/listupcoming.component';
-import AddGame from './components/addgame.component';
-import AddUpcoming from './components/addupcoming.component';
-import AddGear from './components/addgear.component';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
+import React from 'react'
+import {BrowserRouter as Router, Route} from 'react-router-dom'
+import ListGames from './components/listgames.component'
+import Navbar from './components/navbar.component'
+import ListGear from './components/listgear.component'
+import ListUpcoming from './components/listupcoming.component'
+import AddGame from './components/addgame.component'
+import AddUpcoming from './components/addupcoming.component'
+import AddGear from './components/addgear.component'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import './App.css'
 
 function App() {
   return (
@@ -23,7 +23,7 @@ function App() {
         <Route path="/addgear" component={AddGear} />
       </div>
     </Router>
-  );
+  )
 }
 
-export default App;
+export default App

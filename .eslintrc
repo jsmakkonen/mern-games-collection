@@ -1,0 +1,37 @@
+{
+  "parser": "babel-eslint",
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended"
+  ],
+  "env": {
+    "browser": true,
+    "node": true,
+    "commonjs": true
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "rules": {
+    "curly": ["error", "multi"],
+    "quotes": ["error", "single"],
+    "camelcase": ["error", { "ignoreImports": true }],
+    "jsx-quotes": ["error", "prefer-double"],
+    "semi-style": ["error", "last"],
+    "key-spacing": ["error", { "beforeColon": false, "afterColon": true }],
+    "arrow-spacing": "error",
+    "no-multi-spaces": "error",
+    "no-trailing-spaces": [
+      "error",
+      { "skipBlankLines": false, "ignoreComments": true }
+    ],
+    "object-curly-spacing": ["error", "never"],
+    "object-curly-newline": ["error", { "multiline": true }],
+    "array-bracket-spacing": ["error", "never"],
+    "array-bracket-newline": ["error", { "multiline": true }],
+    "no-whitespace-before-property": "error"
+  }
+}
